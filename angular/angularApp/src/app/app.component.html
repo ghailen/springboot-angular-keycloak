@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Logo</a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/products">Products</a>
+    </li>
+    <li class="nav-item" *ngIf="isAppManager()">
+      <a class="nav-link" routerLink="/suppliers">Suppliers</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ml-auto">
+    <!-- Dropdown -->
+    <li class="nav-item dropdown" *ngIf="securityService.Kc.authenticated">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+    <span *ngIf="securityService.Kc.authenticated">
+
+      {{profileName.name}}
+    </span>
+
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item clickable" (click)="onLogout()">Logout</a>
+        <a class="dropdown-item clickable" (click)="onChangePassword()">Change password</a>
+      </div>
+    </li>
+
+
+    <li class="nav-item" *ngIf="!securityService.Kc.authenticated">
+      <a class="clickable text-white" (click)="onLogin()">Login</a>
+    </li>
+
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
